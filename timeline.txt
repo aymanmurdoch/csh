@@ -1,2 +1,3 @@
 Initial setup
 Basic functionality
+Bug fixes and refactoring
