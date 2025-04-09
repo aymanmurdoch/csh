@@ -1,0 +1,43 @@
+<script>
+  function updateCountdowns() {
+    const now = new Date().getTime();
+    document.querySelectorAll('.simulation').forEach(sim => {
+      const countdown = sim.querySelector('.countdown');
+      const dateStr = sim.getAttribute('data-date');
+      const targetTime = new Date(dateStr).getTime();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        countdown.innerText = "Simulation is LIVE!";
+        sim.classList.add("live");
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        countdown.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+      }
+    });
+  }
+
+  setInterval(updateCountdowns, 1000);
+  updateCountdowns();
+
+  document.querySelectorAll('.join-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const sim = button.closest('.simulation');
+      const isLive = sim.classList.contains('live');
+      const errorMsg = sim.querySelector('.error');
+      const successMsg = sim.querySelector('.success');
+
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'none';
+
+      if (isLive) {
+        successMsg.style.display = 'block';
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    });
+  });
+</script>
