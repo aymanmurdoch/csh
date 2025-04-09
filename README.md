@@ -14,3 +14,10 @@ All the files that are within my project
 ## Author
 
 Ayman – 35176068 Murdoch University 
+
+## Video Explainer
+
+https://youtu.be/uqpZyDxUA5I?si=Tf05yBvpIg6lDLuT
+
+## Server Link
+http://34.228.55.86
