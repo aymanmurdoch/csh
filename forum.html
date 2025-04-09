@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community Forum - Cybersecurity Study Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0 20px;
+    }
+    form, .answer-form, .reply-form {
+      margin-top: 15px;
+    }
+    input, textarea, button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 600px;
+    }
+    .post {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+    .answers {
+      margin-top: 10px;
+      padding-left: 20px;
+      border-left: 3px solid #ddd;
+    }
+    .answer {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+    .replies {
+      margin-top: 10px;
+      padding-left: 20px;
+      border-left: 2px dashed #bbb;
+    }
+    .reply {
+      background-color: #f0f0f0;
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 5px;
+    }
+    .answer-form, .reply-form {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Global Community Forum</h1>
+    <p>Collaborate, ask questions, and share threat intelligence with peers.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="simulations.html">Simulations</a></li>
+      <li><a href="learning-paths.html">Learning Paths</a></li>
+      <li><a href="careers.html">Career Center</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="license rationale.html"> license Rationale</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Start a Discussion</h2>
+      <form id="postForm">
+        <label for="username">Your Name</label>
+        <input type="text" id="username" placeholder="Enter your name" required />
+        <label for="question">Your Question</label>
+        <textarea id="question" rows="4" placeholder="Ask a cybersecurity question..." required></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Recent Questions</h2>
+      <div id="posts">
+        <!-- Questions and answers will appear here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Cybersecurity Study Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('postForm');
+    const posts = document.getElementById('posts');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('username').value.trim();
+      const question = document.getElementById('question').value.trim();
+
+      if (name && question) {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+
+        postDiv.innerHTML = `
+          <strong>${name}:</strong>
+          <p>${question}</p>
+          <button class="show-answer-form">Answer</button>
+          <div class="answer-form">
+            <input type="text" class="answer-name" placeholder="Your Name" required>
+            <textarea class="answer-text" rows="2" placeholder="Your answer..." required></textarea>
+            <button class="submit-answer">Submit Answer</button>
+          </div>
+          <div class="answers"></div>
+        `;
+
+        posts.prepend(postDiv);
+        attachAnswerEvents(postDiv);
+        form.reset();
+      }
+    });
+
+    function attachAnswerEvents(postDiv) {
+      const showFormBtn = postDiv.querySelector('.show-answer-form');
+      const answerForm = postDiv.querySelector('.answer-form');
+      const submitAnswerBtn = postDiv.querySelector('.submit-answer');
+      const answersDiv = postDiv.querySelector('.answers');
+
+      showFormBtn.addEventListener('click', () => {
+        answerForm.style.display = answerForm.style.display === 'block' ? 'none' : 'block';
+      });
+
+      submitAnswerBtn.addEventListener('click', () => {
+        const answerName = answerForm.querySelector('.answer-name').value.trim();
+        const answerText = answerForm.querySelector('.answer-text').value.trim();
+
+        if (answerName && answerText) {
+          const answerDiv = document.createElement('div');
+          answerDiv.className = 'answer';
+          answerDiv.innerHTML = `
+            <strong>${answerName}:</strong> <p>${answerText}</p>
+            <button class="show-reply-form">Reply</button>
+            <div class="reply-form">
+              <input type="text" class="reply-name" placeholder="Your Name" required>
+              <textarea class="reply-text" rows="2" placeholder="Write a reply..." required></textarea>
+              <button class="submit-reply">Submit Reply</button>
+            </div>
+            <div class="replies"></div>
+          `;
+
+          answersDiv.appendChild(answerDiv);
+          attachReplyEvents(answerDiv);
+
+          answerForm.querySelector('.answer-name').value = '';
+          answerForm.querySelector('.answer-text').value = '';
+          answerForm.style.display = 'none';
+        }
+      });
+    }
+
+    function attachReplyEvents(answerDiv) {
+      const showReplyBtn = answerDiv.querySelector('.show-reply-form');
+      const replyForm = answerDiv.querySelector('.reply-form');
+      const submitReplyBtn = answerDiv.querySelector('.submit-reply');
+      const repliesDiv = answerDiv.querySelector('.replies');
+
+      showReplyBtn.addEventListener('click', () => {
+        replyForm.style.display = replyForm.style.display === 'block' ? 'none' : 'block';
+      });
+
+      submitReplyBtn.addEventListener('click', () => {
+        const replyName = replyForm.querySelector('.reply-name').value.trim();
+        const replyText = replyForm.querySelector('.reply-text').value.trim();
+
+        if (replyName && replyText) {
+          const replyDiv = document.createElement('div');
+          replyDiv.className = 'reply';
+          replyDiv.innerHTML = `<strong>${replyName}:</strong> <p>${replyText}</p>`;
+          repliesDiv.appendChild(replyDiv);
+
+          replyForm.querySelector('.reply-name').value = '';
+          replyForm.querySelector('.reply-text').value = '';
+          replyForm.style.display = 'none';
+        }
+      });
+    }
+
+    // Optional: Preload example questions
+    const preloadedQuestions = [
+      { name: "JaneDoe", question: "🔥 Detecting Phishing Attacks in Emails" },
+      { name: "CyberFan42", question: "🛡️ Building a Secure Home Network" },
+      { name: "AI_Ninja", question: "🤖 How AI is used in Cybersecurity" }
+    ];
+
+    preloadedQuestions.forEach(({ name, question }) => {
+      document.getElementById('username').value = name;
+      document.getElementById('question').value = question;
+      form.dispatchEvent(new Event('submit'));
+    });
+  </script>
+</body>
+</html>

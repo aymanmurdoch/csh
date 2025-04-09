@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Learning Paths & Job Board - Cybersecurity Study Hub</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0 20px;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+    form {
+      margin-top: 15px;
+    }
+    input, textarea, select, button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      max-width: 600px;
+    }
+    .listing, .resume {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .section-display {
+      margin-top: 20px;
+    }
+    .apply-box {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px dashed #999;
+      background-color: #fff;
+      display: none;
+    }
+    .apply-box input[type="file"] {
+      border: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Learning Paths & Job Board</h1>
+    <p>Smart learning + real opportunities for students and cybersecurity pros.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="simulations.html">Simulations</a></li>
+      <li><a href="forum.html">Community Forum</a></li>
+      <li><a href="careers.html">Career Center</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="license rationale.html"> license Rationale</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Post Your Resume (Students)</h2>
+      <form id="resumeForm">
+        <input type="text" id="studentName" placeholder="Your Name" required />
+        <input type="email" id="studentEmail" placeholder="Email Address" required />
+        <label for="resumeFile">Upload PDF Resume:</label>
+        <input type="file" id="resumeFile" accept="application/pdf" required />
+        <button type="submit">Upload Resume</button>
+      </form>
+      <div id="resumes" class="section-display">
+        <!-- Posted resumes will appear here -->
+      </div>
+    </section>
+
+    <section>
+      <h2>Post a Job Opening (Employers)</h2>
+      <form id="jobForm">
+        <input type="text" id="companyName" placeholder="Company Name" required />
+        <input type="text" id="jobTitle" placeholder="Job Title" required />
+        <input type="text" id="location" placeholder="Job Location" required />
+        <input type="text" id="jobType" placeholder="Job Type (e.g. Full-time, Internship)" required />
+        <input type="text" id="experience" placeholder="Required Experience (e.g. 2 years)" required />
+        <input type="text" id="agePref" placeholder="Age Preference (if any)" />
+        <textarea id="jobDesc" rows="4" placeholder="Job Description..." required></textarea>
+        <button type="submit">Post Job</button>
+      </form>
+      <div id="jobListings" class="section-display">
+        <!-- Posted jobs will appear here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Cybersecurity Study Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Resume Upload
+    const resumeForm = document.getElementById('resumeForm');
+    const resumesDiv = document.getElementById('resumes');
+
+    resumeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('studentName').value.trim();
+      const email = document.getElementById('studentEmail').value.trim();
+      const file = document.getElementById('resumeFile').files[0];
+
+      if (name && email && file) {
+        const resume = document.createElement('div');
+        resume.className = 'resume';
+        resume.innerHTML = `
+          <strong>${name}</strong> - <a href="mailto:${email}">${email}</a>
+          <p><a href="#">${file.name}</a> (PDF Uploaded)</p>
+        `;
+        resumesDiv.prepend(resume);
+        resumeForm.reset();
+      }
+    });
+
+    // Job Posting
+    const jobForm = document.getElementById('jobForm');
+    const jobListingsDiv = document.getElementById('jobListings');
+
+    jobForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const company = document.getElementById('companyName').value.trim();
+      const title = document.getElementById('jobTitle').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const type = document.getElementById('jobType').value.trim();
+      const experience = document.getElementById('experience').value.trim();
+      const age = document.getElementById('agePref').value.trim();
+      const desc = document.getElementById('jobDesc').value.trim();
+
+      if (company && title && location && type && experience && desc) {
+        const listing = document.createElement('div');
+        listing.className = 'listing';
+        const applyBoxId = `apply-${Date.now()}`;
+        listing.innerHTML = `
+          <strong>${company}</strong> is hiring for <strong>${title}</strong><br/>
+          <ul>
+            <li><strong>Location:</strong> ${location}</li>
+            <li><strong>Type:</strong> ${type}</li>
+            <li><strong>Experience Required:</strong> ${experience}</li>
+            <li><strong>Age Preference:</strong> ${age || 'Not specified'}</li>
+          </ul>
+          <p>${desc}</p>
+          <button onclick="document.getElementById('${applyBoxId}').style.display='block'">Submit Resume</button>
+          <div id="${applyBoxId}" class="apply-box">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <label>Upload Resume (PDF):</label>
+            <input type="file" accept="application/pdf" required />
+            <button onclick="alert('Resume submitted for ${title} at ${company}!')">Send</button>
+          </div>
+        `;
+        jobListingsDiv.prepend(listing);
+        jobForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>

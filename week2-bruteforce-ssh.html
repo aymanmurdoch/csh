@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Week 2: Brute-force Attack on SSH</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+      color: #2c3e50;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    .content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .btn {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background-color: #2980b9;
+    }
+    .quiz {
+      display: none;
+      margin-top: 30px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .video-container {
+      margin-top: 30px;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Week 2: Brute-force Attack Against SSH</h1>
+  <div class="content">
+    <h2>What is SSH?</h2>
+    <p>Secure Shell (SSH) is a cryptographic network protocol used for secure data communication, remote command-line login, and other secure network services between two computers. SSH provides a secure channel over an unsecured network using a client-server architecture, connecting an SSH client with an SSH server. SSH is widely used by system administrators to securely manage servers remotely and by developers to push code securely to repositories.</p>
+
+    <h2>The Importance of SSH in Cybersecurity</h2>
+    <p>SSH is critical in modern cybersecurity practices, providing an encrypted communication channel over potentially unsafe networks like the internet. Without SSH, sensitive information such as credentials, commands, or data could easily be intercepted by attackers. This makes SSH an essential protocol for securing remote system administration and file transfers. SSH also supports public key cryptography, enabling key-based authentication, which is far more secure than password-based login methods.</p>
+
+    <h2>What is a Brute-force Attack?</h2>
+    <p>A brute-force attack is a method of attacking a system by trying every possible combination of inputs (such as usernames and passwords) until the correct one is found. While brute-force attacks can be effective, they are generally very time-consuming and computationally expensive, especially if the credentials are strong. In the case of SSH, an attacker typically targets weak or default passwords to gain unauthorized access to a server.</p>
+
+    <h2>How Does a Brute-force Attack on SSH Work?</h2>
+    <ul>
+      <li><strong>Step 1:</strong> The attacker identifies the target system, ensuring that it has an open SSH port (typically port 22).</li>
+      <li><strong>Step 2:</strong> The attacker compiles a list of potential usernames (e.g., admin, root, user) and passwords (common ones like "password123", "admin123").</li>
+      <li><strong>Step 3:</strong> Using an automated tool (such as Hydra or Medusa), the attacker initiates the brute-force attack by attempting to log in with each combination of username and password.</li>
+      <li><strong>Step 4:</strong> If any combination matches the correct login credentials, the attacker gains access to the system.</li>
+    </ul>
+
+    <h2>Common Tools Used for SSH Brute-force Attacks</h2>
+    <ul>
+      <li><strong>Hydra:</strong> A popular tool used for brute-force password cracking. It supports SSH as one of its protocols and allows the attacker to automate the process of testing usernames and passwords.</li>
+      <li><strong>Medusa:</strong> Another widely used brute-force attack tool, which supports multiple protocols, including SSH, and is known for its high performance.</li>
+      <li><strong>John the Ripper:</strong> A tool primarily used for password cracking, which also has features for SSH brute-force attacks.</li>
+    </ul>
+
+    <h2>Why is SSH Brute-force Attack Dangerous?</h2>
+    <p>Brute-force attacks are dangerous because they can compromise a system quickly if proper safeguards are not in place. Once an attacker has successfully guessed the correct credentials, they have full access to the system. This can lead to:</p>
+    <ul>
+      <li>Exfiltration of sensitive data (e.g., passwords, personal data).</li>
+      <li>Installation of malware, backdoors, or other malicious software.</li>
+      <li>Use of the compromised server for launching further attacks.</li>
+      <li>Complete loss of control over the affected system.</li>
+    </ul>
+
+    <h2>Real-World Examples of SSH Brute-force Attacks</h2>
+    <p>Several high-profile incidents have occurred where attackers used brute-force methods to gain access to servers via SSH. For example:</p>
+    <ul>
+      <li><strong>2019: Attacks on the internet of things (IoT):</strong> A number of devices, including cameras and routers, were targeted using weak SSH passwords. Attackers gained access to these devices, causing widespread disruption.</li>
+      <li><strong>2017: Attack on web servers:</strong> Hackers used brute-force techniques to gain control over a large number of web servers by exploiting weak SSH passwords, leading to the spread of malware and data breaches.</li>
+    </ul>
+
+    <h2>Defending Against Brute-force SSH Attacks</h2>
+    <p>There are several methods to mitigate the risk of brute-force SSH attacks:</p>
+    <ul>
+      <li><strong>Use strong, unique passwords:</strong> Enforce a policy requiring complex passwords that are hard to guess.</li>
+      <li><strong>Key-based authentication:</strong> Replace password-based authentication with SSH key pairs. SSH keys are far more secure than passwords.</li>
+      <li><strong>Limit SSH access:</strong> Restrict access to SSH by IP address using firewalls or VPNs to ensure only authorized users can connect.</li>
+      <li><strong>Rate limiting:</strong> Tools like fail2ban or iptables can block an IP address after a certain number of failed login attempts, thus slowing down brute-force attempts.</li>
+      <li><strong>Change default ports:</strong> Moving SSH to a non-standard port (e.g., port 2222) can reduce exposure to automated attacks.</li>
+      <li><strong>Disable root login:</strong> Disable direct root login via SSH to prevent attackers from gaining direct administrative access to your system.</li>
+    </ul>
+
+    <div class="video-container">
+      <h2>Watch a Video on SSH Brute-force Attack & Prevention</h2>
+      <iframe src="https://www.youtube.com/embed/kpWsaWttYLo?si=knk2W931mci1fu4G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <button class="btn" onclick="showQuiz()">Go to Questions</button>
+  </div>
+
+  <div class="quiz" id="quiz">
+    <h2>Week 2 Quiz: Brute-force SSH</h2>
+    
+    <div class="question">
+      <label>1. What does SSH stand for?</label>
+      <input type="text" placeholder="Your answer">
+    </div>
+    
+    <div class="question">
+      <label>2. Name one tool commonly used for brute-force SSH attacks.</label>
+      <input type="text" placeholder="Your answer">
+    </div>
+
+    <div class="question">
+      <label>3. What port is typically used by SSH?</label>
+      <input type="text" placeholder="Your answer">
+    </div>
+
+    <div class="question">
+      <label>4. Mention one way to protect a server from brute-force SSH attacks.</label>
+      <input type="text" placeholder="Your answer">
+    </div>
+
+    <div class="question">
+      <label>5. What can an attacker do if they gain SSH access through brute-force?</label>
+      <input type="text" placeholder="Your answer">
+    </div>
+
+    <button class="btn">Submit Answers</button>
+  </div>
+
+  <script>
+    function showQuiz() {
+      document.getElementById('quiz').style.display = 'block';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>

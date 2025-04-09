@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Simulations - Cybersecurity Study Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #ff0000;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .simulation {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      background-color: #f7f7f7;
+    }
+    .countdown {
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    .error {
+      color: #e74c3c;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+    .success {
+      color: #2ecc71;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Live Cyber Attack Simulations</h1>
+    <p>Engage in real-time scenarios to test and improve your skills.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="learning-paths.html">Learning Paths</a></li>
+      <li><a href="forum.html">Community Forum</a></li>
+      <li><a href="careers.html">Career Center</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="license rationale.html"> license Rationale</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Weekly Simulations</h2>
+
+      <!-- Template for each simulation -->
+      <div class="simulation" data-date="2025-04-12T19:00:00">
+        <p><strong>Week 1:</strong> SQL Injection on a vulnerable website</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+
+      <div class="simulation" data-date="2025-04-19T19:00:00">
+        <p><strong>Week 2:</strong> Brute-force attack against SSH</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+
+      <div class="simulation" data-date="2025-04-26T19:00:00">
+        <p><strong>Week 3:</strong> Ransomware deployment and response</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+
+      <div class="simulation" data-date="2025-05-03T19:00:00">
+        <p><strong>Week 4:</strong> MITM attack on an unsecured network</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+
+      <div class="simulation" data-date="2025-05-10T19:00:00">
+        <p><strong>Week 5:</strong> Insider threat simulation</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+
+      <div class="simulation" data-date="2025-05-17T19:00:00">
+        <p><strong>Week 6:</strong> Phishing attack simulation + payload delivery</p>
+        <p class="countdown">Loading countdown...</p>
+        <button class="join-btn">Join Simulation</button>
+        <p class="error">You can only join when the simulation is live!</p>
+        <p class="success">Simulation is now live! You're in!</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Cybersecurity Study Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function updateCountdowns() {
+      const now = new Date().getTime();
+      document.querySelectorAll('.simulation').forEach(sim => {
+        const countdown = sim.querySelector('.countdown');
+        const dateStr = sim.getAttribute('data-date');
+        const targetTime = new Date(dateStr).getTime();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+          countdown.innerText = "Simulation is LIVE!";
+          sim.classList.add("live");
+        } else {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+          countdown.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+        }
+      });
+    }
+
+    setInterval(updateCountdowns, 1000);
+    updateCountdowns();
+
+    document.querySelectorAll('.join-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const sim = button.closest('.simulation');
+        const isLive = sim.classList.contains('live');
+        const errorMsg = sim.querySelector('.error');
+        const successMsg = sim.querySelector('.success');
+
+        errorMsg.style.display = 'none';
+        successMsg.style.display = 'none';
+
+        if (isLive) {
+          successMsg.style.display = 'block';
+        } else {
+          errorMsg.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

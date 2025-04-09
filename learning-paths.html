@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI-Powered Learning Paths - Cybersecurity Study Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #ff0000;
+    }
+    .path-card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      background-color: #f9f9f9;
+    }
+    .progress {
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .progress-bar {
+      height: 20px;
+      background-color: #3498db;
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      line-height: 20px;
+    }
+    button, a.button-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    button:hover, a.button-link:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>AI-Powered Learning Paths</h1>
+    <p>Get personalized training suggestions based on your progress. Learn smarter, not harder.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="simulations.html">Live Simulations</a></li>
+      <li><a href="forum.html">Community Forum</a></li>
+      <li><a href="careers.html">Career Center</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="license rationale.html">License Rationale</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="path-card">
+      <h2>Week 1: SQL Injection</h2>
+      <div class="progress">
+        <div class="progress-bar" style="width: 100%;">Completed</div>
+      </div>
+      <button disabled>✔ Completed</button>
+    </section>
+
+    <section class="path-card">
+      <h2>Week 2: Brute-force SSH</h2>
+      <div class="progress">
+        <div class="progress-bar" style="width: 0%;">Not Started</div>
+      </div>
+      <a href="week2-bruteforce-ssh.html" class="button-link">Start Learning</a>
+    </section>
+
+    <section class="path-card">
+      <h2>Week 3: Ransomware Response</h2>
+      <div class="progress">
+        <div class="progress-bar" style="width: 0%;">Locked</div>
+      </div>
+      <button disabled>🔒 Complete Week 2 to unlock</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Cybersecurity Study Hub. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
